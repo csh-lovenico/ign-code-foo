@@ -45,7 +45,7 @@ class VideoFragment : Fragment() {
          * @return A new instance of fragment VideoFragment.
          */
         @JvmStatic
-        fun newInstance(startIndex:Int,count:Int) =
+        fun newInstance(startIndex: Int = 0, count: Int = 10) =
             VideoFragment().apply {
                 arguments = Bundle().apply {
                     putInt(ARG_START_INDEX, startIndex)

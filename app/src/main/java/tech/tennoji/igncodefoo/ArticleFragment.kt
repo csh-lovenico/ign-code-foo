@@ -46,11 +46,11 @@ class ArticleFragment : Fragment() {
          * @return A new instance of fragment ArticleFragment.
          */
         @JvmStatic
-        fun newInstance(startIndex:Int,count:Int) =
+        fun newInstance(startIndex: Int = 0, count: Int = 10) =
             ArticleFragment().apply {
                 arguments = Bundle().apply {
-                    putInt(ARG_START_INDEX,startIndex)
-                    putInt(ARG_COUNT,count)
+                    putInt(ARG_START_INDEX, startIndex)
+                    putInt(ARG_COUNT, count)
                 }
             }
     }
