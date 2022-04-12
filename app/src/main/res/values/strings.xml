@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">IGN Code Foo</string>
     <string name="menu_name">IGN</string>
+    <string name="tab_title_articles">ARTICLES</string>
+    <string name="tab_title_videos">VIDEOS</string>
 </resources>
