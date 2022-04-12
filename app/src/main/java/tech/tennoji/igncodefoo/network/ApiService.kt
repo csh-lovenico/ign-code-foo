@@ -33,6 +33,11 @@ interface ApiService {
         @Query("startIndex") startIndex: Int,
         @Query("count") count: Int
     ): Deferred<ArticleResponse>
+
+    @GET("comments")
+    fun getCommentCountAsync(
+        @Query("ids") ids: String
+    ): Deferred<CommentCountResponse>
 }
 
 object Api {

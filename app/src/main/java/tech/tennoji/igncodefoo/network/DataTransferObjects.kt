@@ -72,3 +72,14 @@ data class VideoResponse(
     val startIndex: Int,
     val data: List<VideoData>
 )
+
+data class CommentCount(
+    val id: String,
+    val count: Int
+)
+
+@JsonClass(generateAdapter = true)
+data class CommentCountResponse(
+    val count: Int,
+    val content: List<CommentCount>
+)
