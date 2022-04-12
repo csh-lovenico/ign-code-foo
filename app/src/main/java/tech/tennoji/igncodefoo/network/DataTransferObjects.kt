@@ -25,7 +25,8 @@ data class ArticleData(
     val thumbnails: List<Thumbnail>,
     val metadata: ArticleMetadata,
     val tags: List<String>,
-    val authors: List<Author>
+    val authors: List<Author>,
+    var commentCount: Int?
 )
 
 data class Author(
@@ -63,7 +64,8 @@ data class VideoData(
     val thumbnails: List<Thumbnail>,
     val metadata: VideoMetadata,
     val tags: List<String>,
-    val assets: List<VideoAsset>
+    val assets: List<VideoAsset>,
+    var commentCount: Int?
 )
 
 @JsonClass(generateAdapter = true)
