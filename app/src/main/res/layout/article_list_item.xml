@@ -2,20 +2,24 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
-<data>
-    <variable
-            name="articleData"
-            type="tech.tennoji.igncodefoo.network.ArticleData" />
-</data>
+
+    <data>
+
+        <variable
+                name="articleData"
+                type="tech.tennoji.igncodefoo.network.ArticleData" />
+    </data>
+
     <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-        android:orientation="vertical">
+            android:orientation="vertical">
 
         <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 tools:text="3 MINS AGO"
+                app:time="@{articleData}"
                 android:textAlignment="viewStart"
                 android:id="@+id/article_item_time"
                 android:textColor="@color/ign_red"
@@ -48,6 +52,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:textSize="24sp"
                         android:textStyle="bold"
+                        app:headline="@{articleData}"
                         android:textColor="@color/black"
                         tools:text="Headline 1 2 3 4"
                         android:layout_marginStart="8dp"
@@ -65,6 +70,7 @@
                         android:scaleType="centerCrop"
                         app:layout_constraintHorizontal_bias="0.0"
                         android:clickable="true"
+                        app:image="@{articleData}"
                         android:contentDescription="@string/play_button_text"
                         app:layout_constraintTop_toBottomOf="@+id/article_headline"
                         android:layout_marginStart="8dp"
@@ -77,6 +83,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:id="@+id/article_description"
+                        app:description="@{articleData}"
                         app:layout_constraintTop_toBottomOf="@+id/article_image"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="16dp"
@@ -91,6 +98,7 @@
                         android:layout_height="30dp"
                         tools:srcCompat="@tools:sample/avatars"
                         android:id="@+id/article_author_avatar"
+                        app:authorAvatar="@{articleData}"
                         app:layout_constraintTop_toBottomOf="@+id/article_description"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="8dp"
@@ -104,6 +112,7 @@
                         android:id="@+id/author_by"
                         app:layout_constraintTop_toBottomOf="@+id/article_description"
                         android:layout_marginTop="8dp"
+                        app:authorHide="@{articleData}"
                         app:layout_constraintStart_toEndOf="@+id/article_author_avatar"
                         android:layout_marginStart="8dp"
                         android:textColor="@color/black"
@@ -116,6 +125,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/article_author"
+                        app:authorName="@{articleData}"
                         app:layout_constraintStart_toEndOf="@+id/author_by"
                         app:layout_constraintTop_toBottomOf="@+id/article_description"
                         android:layout_marginStart="4dp"
@@ -136,6 +146,7 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:game="@{articleData}"
                         android:layout_marginBottom="8dp"
                         android:textColor="@color/ign_red"
                         android:textStyle="bold"
@@ -148,6 +159,7 @@
                         android:id="@+id/article_comments"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:layout_marginEnd="16dp"
+                        app:commentCount="@{articleData}"
                         app:layout_constraintTop_toBottomOf="@+id/article_author_avatar"
                         android:layout_marginTop="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
