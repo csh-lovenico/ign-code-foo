@@ -3,4 +3,6 @@
     <string name="menu_name">IGN</string>
     <string name="tab_title_articles">ARTICLES</string>
     <string name="tab_title_videos">VIDEOS</string>
+    <string name="play_button_text">Play video</string>
+    <string name="author_by">By</string>
 </resources>
