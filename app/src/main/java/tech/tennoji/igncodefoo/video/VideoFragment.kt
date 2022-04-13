@@ -1,10 +1,11 @@
-package tech.tennoji.igncodefoo
+package tech.tennoji.igncodefoo.video
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import tech.tennoji.igncodefoo.R
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_START_INDEX = "startIndex"
