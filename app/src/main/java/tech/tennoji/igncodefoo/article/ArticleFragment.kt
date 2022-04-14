@@ -1,7 +1,6 @@
 package tech.tennoji.igncodefoo.article
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import tech.tennoji.igncodefoo.R
 import tech.tennoji.igncodefoo.databinding.FragmentArticleBinding
 
@@ -49,7 +47,6 @@ class ArticleFragment : Fragment() {
             inflater, R.layout.fragment_article, container, false
         )
         binding.lifecycleOwner = this
-        viewModel.getArticleData(param1!!, param2!!)
         val adapter = ArticleAdapter(ArticleListener { slug -> viewModel.onCardClick(slug) })
         val recyclerView = binding.articleRecyclerView
         recyclerView.adapter = adapter
@@ -72,14 +69,9 @@ class ArticleFragment : Fragment() {
                 viewModel.onErrorToastComplete()
             }
         }
-
+        viewModel.getArticleData(param1!!, param2!!)
         // Inflate the layout for this fragment
         return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
     }
 
     companion object {
