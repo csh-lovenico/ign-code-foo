@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import tech.tennoji.igncodefoo.databinding.ArticleListItemBinding
+import tech.tennoji.igncodefoo.databinding.ReviewArticleItemBinding
 import tech.tennoji.igncodefoo.network.ArticleData
 
 class ArticleListener(val articleListener: (slug: String) -> Unit) {
@@ -23,38 +24,78 @@ class ArticleDataDiffCallback : DiffUtil.ItemCallback<ArticleData>() {
     }
 }
 
-class ArticleAdapter(val articleListener: ArticleListener) :
-    ListAdapter<ArticleData, ArticleAdapter.ViewHolder>(ArticleDataDiffCallback()) {
-    class ViewHolder private constructor(val binding: ArticleListItemBinding) :
+class ArticleAdapter(private val articleListener: ArticleListener) :
+    ListAdapter<ArticleData, RecyclerView.ViewHolder>(ArticleDataDiffCallback()) {
+
+    companion object {
+        const val NORMAL_ARTICLE = 0
+        const val REVIEW_ARTICLE = 1
+    }
+
+    class NormalArticleViewHolder private constructor(private val binding: ArticleListItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(item: ArticleData, listener: ArticleListener) {
             binding.clickListener = listener
             binding.articleData = item
-            if(item.authors.isEmpty()){
+            if (item.authors.isEmpty()) {
                 binding.articleAuthor.visibility = View.GONE
                 binding.articleAuthorAvatar.visibility = View.GONE
                 binding.authorBy.visibility = View.GONE
             }
-            if(item.metadata.description.isNullOrEmpty()){
+            if (item.metadata.description.isNullOrEmpty()) {
                 binding.articleDescription.visibility = View.GONE
             }
         }
 
         companion object {
-            fun from(parent: ViewGroup): ViewHolder {
+            fun from(parent: ViewGroup): NormalArticleViewHolder {
                 val inflater = LayoutInflater.from(parent.context)
                 val binding = ArticleListItemBinding.inflate(inflater, parent, false)
-                return ViewHolder(binding)
+                return NormalArticleViewHolder(binding)
             }
         }
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(getItem(position)!!, articleListener)
+    class ReviewArticleViewHolder private constructor(private val binding: ReviewArticleItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: ArticleData, listener: ArticleListener) {
+            binding.clickListener = listener
+            binding.articleData = item
+            if (item.authors.isEmpty()) {
+                binding.reviewAuthorName.visibility = View.GONE
+                binding.reviewAuthorAvatar.visibility = View.GONE
+                binding.reviewAuthorBy.visibility = View.GONE
+            }
+        }
+
+        companion object {
+            fun from(parent: ViewGroup): ReviewArticleViewHolder {
+                val inflater = LayoutInflater.from(parent.context)
+                val binding = ReviewArticleItemBinding.inflate(inflater, parent, false)
+                return ReviewArticleViewHolder(binding)
+            }
+        }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        return ViewHolder.from(parent)
+    override fun getItemViewType(position: Int): Int {
+        return getItem(position).viewType!!
+    }
+
+    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
+        val type = getItemViewType(position)
+        if (type == NORMAL_ARTICLE) {
+            (holder as NormalArticleViewHolder).bind(getItem(position)!!, articleListener)
+        } else {
+            (holder as ReviewArticleViewHolder).bind(getItem(position)!!, articleListener)
+        }
+    }
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
+        return if (viewType == NORMAL_ARTICLE) {
+            NormalArticleViewHolder.from(parent)
+        } else {
+            ReviewArticleViewHolder.from(parent)
+        }
     }
 
 }

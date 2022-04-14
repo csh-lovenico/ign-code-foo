@@ -32,6 +32,11 @@ class ArticleViewModel : ViewModel() {
                 Api.retrofitService.getArticleListAsync(startIndex, count).await()
             val contentIdList = ArrayList<String>()
             articleResponse.data.forEach {
+                if (it.metadata.headline.contains("Review")) {
+                    it.viewType = ArticleAdapter.REVIEW_ARTICLE
+                } else {
+                    it.viewType = ArticleAdapter.NORMAL_ARTICLE
+                }
                 contentIdList.add(it.contentId)
             }
             val contentIds = contentIdList.joinToString(",")
