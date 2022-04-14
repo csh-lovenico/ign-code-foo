@@ -7,6 +7,8 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import tech.tennoji.igncodefoo.article.ArticleFragment
+import tech.tennoji.igncodefoo.video.VideoFragment
 import java.util.ArrayList
 
 class MainActivity : AppCompatActivity() {
