@@ -71,8 +71,6 @@ fun TextView.setGame(item: ArticleData?) {
         if (it.metadata.objectName != null) {
             text = it.metadata.objectName
             paintFlags = paintFlags.or(Paint.UNDERLINE_TEXT_FLAG)
-        } else {
-            visibility = View.INVISIBLE
         }
     }
 }

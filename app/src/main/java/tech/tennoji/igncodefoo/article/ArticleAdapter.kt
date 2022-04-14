@@ -41,9 +41,21 @@ class ArticleAdapter(private val articleListener: ArticleListener) :
                 binding.articleAuthor.visibility = View.GONE
                 binding.articleAuthorAvatar.visibility = View.GONE
                 binding.authorBy.visibility = View.GONE
+            } else {
+                binding.articleAuthor.visibility = View.VISIBLE
+                binding.articleAuthorAvatar.visibility = View.VISIBLE
+                binding.authorBy.visibility = View.VISIBLE
+
             }
             if (item.metadata.description.isNullOrEmpty()) {
                 binding.articleDescription.visibility = View.GONE
+            } else {
+                binding.articleDescription.visibility = View.VISIBLE
+            }
+            if (item.metadata.objectName == null) {
+                binding.articleGame.visibility = View.INVISIBLE
+            } else {
+                binding.articleGame.visibility = View.VISIBLE
             }
         }
 
@@ -65,6 +77,15 @@ class ArticleAdapter(private val articleListener: ArticleListener) :
                 binding.reviewAuthorName.visibility = View.GONE
                 binding.reviewAuthorAvatar.visibility = View.GONE
                 binding.reviewAuthorBy.visibility = View.GONE
+            } else {
+                binding.reviewAuthorName.visibility = View.VISIBLE
+                binding.reviewAuthorAvatar.visibility = View.VISIBLE
+                binding.reviewAuthorBy.visibility = View.VISIBLE
+            }
+            if (item.metadata.objectName == null) {
+                binding.reviewGame.visibility = View.INVISIBLE
+            } else {
+                binding.reviewGame.visibility = View.VISIBLE
             }
         }
 
