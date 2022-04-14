@@ -16,26 +16,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         supportActionBar?.hide()
-        val fragments = ArrayList<Fragment>()
-        val titles = ArrayList<String>()
-        fragments.add(ArticleFragment.newInstance(0, 20))
-        fragments.add(VideoFragment.newInstance(0, 20))
-        titles.add(resources.getString(R.string.tab_title_articles))
-        titles.add(resources.getString(R.string.tab_title_videos))
-        val viewPager = findViewById<ViewPager2>(R.id.view_pager)
-
-        viewPager.adapter = object : FragmentStateAdapter(this) {
-            override fun getItemCount(): Int {
-                return fragments.size
-            }
-
-            override fun createFragment(position: Int): Fragment {
-                return fragments[position]
-            }
-        }
-        val tabLayout = findViewById<TabLayout>(R.id.tabs)
-        TabLayoutMediator(tabLayout, viewPager) { tab, position ->
-            tab.text = titles[position]
-        }.attach()
     }
 }

@@ -5,10 +5,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import tech.tennoji.igncodefoo.R
+import tech.tennoji.igncodefoo.databinding.FragmentArticleBinding
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -40,31 +43,35 @@ class ArticleFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-
-
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_article, container, false)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    ): View {
+        val binding = DataBindingUtil.inflate<FragmentArticleBinding>(
+            inflater, R.layout.fragment_article, container, false
+        )
+        binding.lifecycleOwner = this
         viewModel.getArticleData(param1!!, param2!!)
         val adapter = ArticleAdapter(ArticleListener { slug -> viewModel.onCardClick(slug) })
-        val recyclerView = view.findViewById<RecyclerView>(R.id.article_recycler_view)
-        if (recyclerView != null) {
-            recyclerView.adapter = adapter
-        }
+        val recyclerView = binding.articleRecyclerView
+        recyclerView.adapter = adapter
         viewModel.articleList.observe(viewLifecycleOwner) {
             adapter.submitList(it.data)
         }
 
         viewModel.openLink.observe(viewLifecycleOwner) {
             it?.let {
-                Log.i("article", it)
+                val bundle = Bundle()
+                bundle.putString("url", "https://ign.com/articles/$it")
+                findNavController().navigate(R.id.action_mainFragment_to_webViewFragment, bundle)
                 viewModel.onOpenLinkComplete()
             }
         }
+
+        // Inflate the layout for this fragment
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
     }
 
     companion object {

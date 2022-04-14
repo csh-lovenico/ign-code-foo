@@ -6,4 +6,6 @@
     <string name="play_button_text">Play video</string>
     <string name="author_by">By</string>
     <string name="feed_time">%d mins ago</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
