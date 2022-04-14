@@ -1,6 +1,8 @@
 package tech.tennoji.igncodefoo.binding
 
+import android.graphics.Paint
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.constraintlayout.utils.widget.ImageFilterView
 import androidx.databinding.BindingAdapter
@@ -13,7 +15,7 @@ import java.time.Instant
 @BindingAdapter("time")
 fun TextView.setTime(item: ArticleData?) {
     item?.let {
-        val timePosted = Instant.parse(it.metadata.publishDate)
+        val timePosted = Instant.parse(it.metadata.publishDate.replace("+0000", "Z"))
         val timeNow = Instant.now()
         val duration = Duration.between(timePosted, timeNow)
         val minutes = duration.toMinutes()
@@ -46,17 +48,17 @@ fun TextView.setDescription(item: ArticleData?) {
 fun ImageFilterView.getAuthorAvatar(item: ArticleData?) {
     item?.let {
         if (it.authors.isNotEmpty()) {
-            load(it.authors[0].thumbnail)
-        } else {
-            visibility = View.GONE
+            if (it.authors[0].thumbnail != "") {
+                load(it.authors[0].thumbnail)
+            } else load(R.mipmap.ic_launcher)
         }
     }
 }
 
 @BindingAdapter("authorName")
-fun TextView.setAuthorName(item: ArticleData?){
+fun TextView.setAuthorName(item: ArticleData?) {
     item?.let {
-        if(it.authors.isNotEmpty()) {
+        if (it.authors.isNotEmpty()) {
             text = it.authors[0].name
         }
     }
@@ -65,14 +67,17 @@ fun TextView.setAuthorName(item: ArticleData?){
 @BindingAdapter("game")
 fun TextView.getGame(item: ArticleData?) {
     item?.let {
-        if (it.metadata.objectName!=null) {
+        if (it.metadata.objectName != null) {
             text = it.metadata.objectName
+            paintFlags = paintFlags.or(Paint.UNDERLINE_TEXT_FLAG)
+        } else {
+            visibility = View.INVISIBLE
         }
     }
 }
 
 @BindingAdapter("commentCount")
-fun TextView.getCommentCount(item: ArticleData?){
+fun Button.getCommentCount(item: ArticleData?) {
     item?.let {
         text = it.commentCount.toString()
     }

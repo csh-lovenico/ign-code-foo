@@ -3,13 +3,15 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ArticleFragment"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".article.ArticleFragment"
         android:orientation="vertical">
 
     <!-- TODO: Update blank fragment layout -->
 
     <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             android:layout_height="match_parent"
             android:id="@+id/article_recycler_view"
             tools:listitem="@layout/article_list_item" />
