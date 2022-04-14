@@ -3,21 +3,20 @@ package tech.tennoji.igncodefoo.article
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.launch
 import tech.tennoji.igncodefoo.network.Api
-import tech.tennoji.igncodefoo.network.ArticleResponse
+import tech.tennoji.igncodefoo.network.ArticleData
 
 class ArticleViewModel : ViewModel() {
 
 
     private var viewModelJob = SupervisorJob()
 
-    private val _articleList = MutableLiveData<ArticleResponse>()
-    val articleList: LiveData<ArticleResponse>
+    private val _articleList = MutableLiveData<List<ArticleData>>()
+    val articleList: LiveData<List<ArticleData>>
         get() = _articleList
 
     private val _openLink = MutableLiveData<String?>()
@@ -56,7 +55,7 @@ class ArticleViewModel : ViewModel() {
                         }
                     }
                 }
-                _articleList.postValue(articleResponse)
+                _articleList.postValue(articleResponse.data)
             } catch (e: Exception) {
                 onError()
             }
@@ -71,7 +70,7 @@ class ArticleViewModel : ViewModel() {
         _openLink.value = null
     }
 
-    fun onError() {
+    private fun onError() {
         _error.postValue(true)
     }
 

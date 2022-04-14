@@ -20,7 +20,7 @@ class ArticleDataDiffCallback : DiffUtil.ItemCallback<ArticleData>() {
     }
 
     override fun areContentsTheSame(oldItem: ArticleData, newItem: ArticleData): Boolean {
-        return oldItem == newItem
+        return oldItem.metadata == newItem.metadata
     }
 }
 

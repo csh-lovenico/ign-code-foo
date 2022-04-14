@@ -54,7 +54,7 @@ class ArticleFragment : Fragment() {
         val recyclerView = binding.articleRecyclerView
         recyclerView.adapter = adapter
         viewModel.articleList.observe(viewLifecycleOwner) {
-            adapter.submitList(it.data)
+            adapter.submitList(it)
         }
 
         viewModel.openLink.observe(viewLifecycleOwner) {
