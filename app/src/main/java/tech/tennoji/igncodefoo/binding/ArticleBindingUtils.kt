@@ -45,7 +45,7 @@ fun TextView.setDescription(item: ArticleData?) {
 }
 
 @BindingAdapter("authorAvatar")
-fun ImageFilterView.getAuthorAvatar(item: ArticleData?) {
+fun ImageFilterView.setAuthorAvatar(item: ArticleData?) {
     item?.let {
         if (it.authors.isNotEmpty()) {
             if (it.authors[0].thumbnail != "") {
@@ -60,12 +60,13 @@ fun TextView.setAuthorName(item: ArticleData?) {
     item?.let {
         if (it.authors.isNotEmpty()) {
             text = it.authors[0].name
+            paintFlags = paintFlags.or(Paint.UNDERLINE_TEXT_FLAG)
         }
     }
 }
 
 @BindingAdapter("game")
-fun TextView.getGame(item: ArticleData?) {
+fun TextView.setGame(item: ArticleData?) {
     item?.let {
         if (it.metadata.objectName != null) {
             text = it.metadata.objectName
@@ -77,7 +78,7 @@ fun TextView.getGame(item: ArticleData?) {
 }
 
 @BindingAdapter("commentCount")
-fun Button.getCommentCount(item: ArticleData?) {
+fun Button.setCommentCount(item: ArticleData?) {
     item?.let {
         text = it.commentCount.toString()
     }
