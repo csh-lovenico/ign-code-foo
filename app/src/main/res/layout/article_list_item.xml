@@ -92,7 +92,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/article_image"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="16dp"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         android:layout_marginTop="8dp"
                         tools:text="Description"
                         android:layout_marginEnd="16dp"
@@ -109,7 +109,12 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginTop="8dp"
                         android:layout_marginStart="16dp"
-                        app:roundPercent="1" />
+                        app:roundPercent="1"
+                        app:layout_constraintBottom_toTopOf="@+id/article_game"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintEnd_toStartOf="@+id/author_by"
+                        app:layout_constraintHorizontal_chainStyle="packed" />
 
                 <TextView
                         android:text="@string/author_by"
@@ -123,7 +128,9 @@
                         android:textColor="@color/black"
                         android:textStyle="bold"
                         app:layout_constraintBottom_toTopOf="@+id/article_game"
-                        android:layout_marginBottom="8dp" />
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintEnd_toStartOf="@+id/article_author" />
 
                 <TextView
                         android:text="TextView"
@@ -132,24 +139,19 @@
                         android:id="@+id/article_author"
                         app:authorName="@{articleData}"
                         app:layout_constraintStart_toEndOf="@+id/author_by"
-                        app:layout_constraintTop_toBottomOf="@+id/article_description"
                         android:layout_marginStart="4dp"
-                        android:layout_marginTop="8dp"
                         android:textStyle="bold"
                         android:textColor="@color/black"
                         tools:text="Author"
-                        app:layout_constraintBottom_toTopOf="@+id/article_game"
-                        android:layout_marginBottom="8dp" />
+                        app:layout_constraintBaseline_toBaselineOf="@+id/author_by" />
 
                 <TextView
                         android:text="TextView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/article_game"
-                        app:layout_constraintTop_toBottomOf="@+id/article_author_avatar"
                         app:layout_constraintStart_toStartOf="parent"
                         android:layout_marginStart="16dp"
-                        android:layout_marginTop="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:game="@{articleData}"
                         android:layout_marginBottom="8dp"
@@ -174,11 +176,12 @@
                         android:includeFontPadding="false"
                         android:backgroundTint="@color/white"
                         app:cornerRadius="30dp"
-                        android:minHeight="0dp"
+                        android:minHeight="48dp"
                         android:minWidth="0dp"
                         app:icon="@android:drawable/stat_notify_chat"
                         app:iconPadding="0dp"
-                        app:iconTint="@color/black" />
+                        app:iconTint="@color/black"
+                        android:stateListAnimator="@null" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
