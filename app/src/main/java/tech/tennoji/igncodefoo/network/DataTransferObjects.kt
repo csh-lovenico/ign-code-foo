@@ -26,7 +26,9 @@ data class ArticleData(
     val metadata: ArticleMetadata,
     val tags: List<String>,
     val authors: List<Author>,
-    var commentCount: Int?
+    // these fields are not in the json, but we can use them to store extra data
+    var commentCount: Int?,
+    var viewType:Int?
 )
 
 data class Author(
