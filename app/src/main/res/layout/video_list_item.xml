@@ -8,6 +8,9 @@
         <variable
                 name="videoData"
                 type="tech.tennoji.igncodefoo.network.VideoData" />
+        <variable
+                name="clickListener"
+                type="tech.tennoji.igncodefoo.video.VideoListener" />
     </data>
 
     <LinearLayout
@@ -23,6 +26,7 @@
                 android:id="@+id/video_item_time"
                 android:textColor="@color/ign_red"
                 android:textStyle="bold"
+                app:videoTime="@{videoData}"
                 android:textSize="16sp"
                 android:paddingStart="8dp"
                 android:paddingEnd="8dp"
@@ -51,6 +55,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:scaleType="centerCrop"
+                        app:videoImage="@{videoData}"
                         app:layout_constraintHorizontal_bias="0.0"
                         android:clickable="true"
                         android:contentDescription="@string/play_button_text"
@@ -79,6 +84,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         android:textAlignment="viewStart"
                         android:textSize="24sp"
+                        app:videoHeadline="@{videoData}"
                         tools:text="Headline 1 2 3 4 5"
                         android:layout_marginTop="16dp"
                         android:layout_marginStart="16dp"
@@ -94,6 +100,7 @@
                         app:layout_constraintTop_toBottomOf="@+id/video_headline"
                         android:textColor="@color/ign_red"
                         android:textSize="16sp"
+                        app:videoSeries="@{videoData}"
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="8dp"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -108,13 +115,21 @@
                         app:layout_constraintTop_toBottomOf="@+id/video_headline"
                         app:layout_constraintEnd_toEndOf="parent"
                         android:textSize="16sp"
-                        android:textColor="@color/white"
+                        android:textColor="@color/black"
                         android:layout_marginTop="8dp"
                         android:layout_marginEnd="16dp"
+                        app:videoComment="@{videoData}"
                         app:layout_constraintBottom_toBottomOf="parent"
                         android:layout_marginBottom="8dp"
                         android:textStyle="bold"
-                        android:text="0" />
+                        app:icon="@android:drawable/stat_notify_chat"
+                        android:text="0"
+                        android:minHeight="48dp"
+                        android:minWidth="0dp"
+                        android:stateListAnimator="@null"
+                        app:iconPadding="0dp"
+                        app:iconTint="@color/black"
+                        android:backgroundTint="@color/white" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>
