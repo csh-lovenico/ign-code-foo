@@ -17,8 +17,14 @@ fun TextView.setVideoTime(item: VideoData?) {
         val timePosted = Instant.parse(it.metadata.publishDate.replace("+0000", "Z"))
         val timeNow = Instant.now()
         val duration = Duration.between(timePosted, timeNow)
-        val minutes = duration.toMinutes()
-        text = context.resources.getString(R.string.feed_time, minutes)
+        text = if (duration.toDays() != 0L) {
+            context.resources.getString(R.string.feed_day, duration.toDays())
+        } else if (duration.toHours() != 0L) {
+            context.resources.getString(R.string.feed_hour, duration.toHours())
+        } else {
+            val minutes = duration.toMinutes()
+            context.resources.getString(R.string.feed_time, minutes)
+        }
     }
 }
 
